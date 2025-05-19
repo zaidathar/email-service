@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from code.config import load_config
+from code.routes.email import email_bp
 from code.utils.logger import logger
 import os
 
@@ -16,6 +17,8 @@ limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["100 per day", "20 per hour", "5 per minute"]
 )
+
+app.register_blueprint(email_bp)
 
 @app.route('/health', methods=['GET'])
 @limiter.limit("1000 per minute")
