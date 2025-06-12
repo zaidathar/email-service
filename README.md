@@ -1,15 +1,28 @@
 
 # Email Service API
 
-A simple email service built with Flask that supports background email sending and secure API key access.
+---
+
+## Overview
+
+The **Simple Email Service API** is a lightweight and robust Flask application designed to handle email sending efficiently and securely. It provides a dedicated RESTful endpoint for sending emails, offloading the actual SMTP communication to a background thread pool. This ensures that your API remains responsive, even during high email volumes or slow SMTP server responses.
+
+Built with security in mind, the service incorporates API key authentication and CORS protection, making it suitable for integration into various applications. Its Dockerized setup and Poetry-managed dependencies ensure a consistent and portable development and deployment experience.
+
+---
 
 ## Features
-- Background email sending using ThreadPool
-- Uses SMTP server to send email.
-- CORS and API key security
-- Environment-based config with `.env`
-- Dockerized
-- Poetry for dependency management
+
+* **Background Email Sending:** Leverages a `ThreadPoolExecutor` to send emails asynchronously, preventing blocking of the main API thread.
+* **SMTP Integration:** Utilizes standard SMTP protocol for reliable email delivery.
+* **Secure API Access:**
+    * **API Key Authentication:** All API requests require a valid API key for authorization.
+    * **CORS (Cross-Origin Resource Sharing) Protection:** Configurable CORS settings to restrict access from unauthorized domains.
+* **Environment-based Configuration:** All sensitive and environment-specific settings are managed via `.env` files.
+* **Dockerized:** Ready for containerized deployment, ensuring consistency across environments.
+* **Poetry for Dependency Management:** Modern and robust dependency management and project packaging.
+
+--- 
 
 ## Usage
 
@@ -53,10 +66,14 @@ A simple email service built with Flask that supports background email sending a
         docker run --env-file .env -p 5000:5000 email-service
     ```
 
+---
+
 ## Endpoints
 - `POST /api/send-email`
 - `GET /health`
 - `POST /api/reload-config`
+
+---
 
 ## .env file
 ```bash
